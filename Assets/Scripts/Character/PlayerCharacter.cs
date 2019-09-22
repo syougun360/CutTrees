@@ -10,6 +10,12 @@ public class PlayerCharacter : MonoBehaviour
 	float chargeTime = 1.0f;
 
 	[SerializeField]
+	int attackPower = 1;
+
+	[SerializeField]
+	int chargeAttackPower = 10;
+
+	[SerializeField]
 	CharaMotionController motionController = null;
 
 	[SerializeField]
@@ -124,12 +130,12 @@ public class PlayerCharacter : MonoBehaviour
 		{
 			EffectManager.PlayEffect(EffectManager.EFFECT_ID.HIT_CHARGE, ref effectPos);
 			isChargeAttackSuccess = false;
-			damage = 10;
+			damage = chargeAttackPower;
 		}
 		else
 		{
 			EffectManager.PlayEffect(EffectManager.EFFECT_ID.HIT_ATTACK, ref effectPos);
-			damage = 1;
+			damage = attackPower;
 		}
 
 		TreeObject.OnDamage(damage);
