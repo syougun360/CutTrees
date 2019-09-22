@@ -456,7 +456,7 @@ MonoBehaviour:
     m_Bits: 1
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 1
+  antialiasingMode: 0
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -581,6 +581,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1466019582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8677590586597222877, guid: 1ea582fe4c4b83948b9485bfc59ed008,
+    type: 3}
+  m_PrefabInstance: {fileID: 8677590587192559563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!154 &1466019585
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466019582}
+  m_Material: {fileID: 0}
+  m_Enabled: 0
+  m_TerrainData: {fileID: 15600000, guid: 02bc0e2176f6a4e4ea3faf0c622664cf, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!1 &1592634808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1258,7 @@ PrefabInstance:
     - target: {fileID: 8677590586597222866, guid: 1ea582fe4c4b83948b9485bfc59ed008,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.03
+      value: -35.79
       objectReference: {fileID: 0}
     - target: {fileID: 8677590586597222866, guid: 1ea582fe4c4b83948b9485bfc59ed008,
         type: 3}
@@ -1283,5 +1300,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8677590586597222867, guid: 1ea582fe4c4b83948b9485bfc59ed008,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8677590586597222867, guid: 1ea582fe4c4b83948b9485bfc59ed008,
+        type: 3}
+      propertyPath: m_DrawHeightmap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8677590586597222867, guid: 1ea582fe4c4b83948b9485bfc59ed008,
+        type: 3}
+      propertyPath: m_DrawTreesAndFoliage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8677590586597222867, guid: 1ea582fe4c4b83948b9485bfc59ed008,
+        type: 3}
+      propertyPath: m_LightmapParameters
+      value: 
+      objectReference: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ea582fe4c4b83948b9485bfc59ed008, type: 3}
