@@ -124,13 +124,18 @@ public class EffectManager : ManagerBehaviour<EffectManager>
 		for (int i = 0; i < effectLoadDatas.Length; i++)
 		{
 			var data = effectLoadDatas[i];
+            if(data.isLoaded)
+            {
+                continue;
+            }
+
 			if (data.assetLoadHandle.Result == ASSET_LOAD_RESULT_TYPE.SUCCESS)
 			{
-				data.gameObject = data.assetLoadHandle.LoadObject as GameObject;
-				data.isLoaded = true;
+                data.gameObject = data.assetLoadHandle.LoadObject as GameObject;
+                data.isLoaded = true;
 
-				int id = (int)data.effectId;
-				int count = EFFECT_COUNT_TABLE[id];
+                int id = (int)data.effectId;
+                int count = EFFECT_COUNT_TABLE[id];
 				ParticleSystem[] particles = new ParticleSystem[count];
 				for (int k = 0; k < particles.Length; k++)
 				{
@@ -139,12 +144,14 @@ public class EffectManager : ManagerBehaviour<EffectManager>
 					instance.SetActive(false);
 					particles[k] = instance.GetComponent<ParticleSystem>();
 				}
+
 				effectTable.Add(id, particles);
 			}
 			else if (data.assetLoadHandle.Result == ASSET_LOAD_RESULT_TYPE.FAILURE)
 			{
 				int id = (int)data.effectId;
-				effectTable.Add(id, null);
+                data.isLoaded = true;
+                effectTable.Add(id, null);
 			}
 			else
 			{
