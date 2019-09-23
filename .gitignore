@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+iOS/
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
