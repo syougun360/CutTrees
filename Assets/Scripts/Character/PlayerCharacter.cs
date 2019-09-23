@@ -116,6 +116,15 @@ public class PlayerCharacter : MonoBehaviour
 		return motionController.GetBoolParam("isCharge");
 	}
 
+	public void Idle()
+	{
+		motionController.PlayIdle();
+		isChargeAttackSuccess = false;
+
+		EffectManager.StopEffect(EffectManager.EFFECT_ID.CHARGE, ref chargeEffectHandle);
+		EffectManager.StopEffect(EffectManager.EFFECT_ID.CHARGE_START, ref chargeStartEffectHandle);
+	}
+
 	/// <summary>
 	/// ツリーにあたった
 	/// </summary>
@@ -151,5 +160,11 @@ public class PlayerCharacter : MonoBehaviour
 	void onDrawWeaponTrail(int value)
 	{
 		weaponTrailRenderer.enabled = value == 1;
+	}
+
+	public void PlayWinMotion()
+	{
+		Idle();
+		motionController.SetTriggerParam("Win");
 	}
 }

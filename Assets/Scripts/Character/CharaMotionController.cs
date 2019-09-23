@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class CharaMotionController : MonoBehaviour
 {
+	readonly int IDLE_NAME_HASH = Animator.StringToHash("Idle");
+
 	[SerializeField]
 	int animatorLayerIndex = 0;
 
@@ -61,7 +63,7 @@ public class CharaMotionController : MonoBehaviour
 			}
 		}
 
-		//PlayMotion();
+		PlayMotion(IDLE_NAME_HASH);
 	}
 
 	/// <summary>

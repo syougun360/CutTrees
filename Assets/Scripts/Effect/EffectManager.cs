@@ -18,6 +18,8 @@ public class EffectManager : ManagerBehaviour<EffectManager>
 		CHARGE_START,
 		HIT_ATTACK,
 		HIT_CHARGE,
+		TREE_DOWN_IMPACT,
+		TREE_APPEAR_IMPACT,
 		MAX,
 	}
 
@@ -50,6 +52,8 @@ public class EffectManager : ManagerBehaviour<EffectManager>
 		"effect/charge_start",
 		"effect/hit_attack",
 		"effect/hit_charge",
+		"effect/tree_down_impact",
+		"effect/tree_appear_impact"
 	};
 
 	readonly int[] EFFECT_COUNT_TABLE = new int[(int)EFFECT_ID.MAX] {
@@ -58,6 +62,8 @@ public class EffectManager : ManagerBehaviour<EffectManager>
 		5,
 		5,
 		5,
+		2,
+		2,
 	};
 
 	const int ERROR_HANDLE = -1;

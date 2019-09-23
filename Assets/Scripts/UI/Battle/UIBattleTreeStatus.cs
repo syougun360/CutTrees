@@ -7,20 +7,20 @@ using UnityEngine.UI;
 public class UIBattleTreeStatus : MonoBehaviour
 {
 	[SerializeField]
-	Image hpBar;
+	Image hpBar = null;
 
 	[SerializeField]
-	TextMeshProUGUI hpValue;
+	TextMeshProUGUI hpValue = null;
 
 	[SerializeField]
-	TextMeshProUGUI waveValue;
+	TextMeshProUGUI waveValue = null;
 
 	[SerializeField]
-	AnimationCurve hpAnimation;
+	AnimationCurve hpAnimation = null;
 
+	float hpAnimationTime = 0.0f;
 	float prevHpRatio = 1.0f;
 	float newHpRatio = 1.0f;
-	float hpAnimationTime = 0.0f;
 	float startChangeHpTime = 0.0f;
 
 	private void Update()
@@ -40,6 +40,11 @@ public class UIBattleTreeStatus : MonoBehaviour
 		{
 			hpBar.fillAmount = ratio;
 			prevHpRatio = ratio;
+		}
+
+		if (hp <= 0)
+		{
+			hp = 0;
 		}
 
 		startChangeHpTime = GlobalDefine.GameTime;

@@ -104,6 +104,25 @@ public class SceneManager : ManagerBehaviour<SceneManager>
 	}
 
 	/// <summary>
+	/// シーンをオブジェクトを取得
+	/// </summary>
+	/// <param name="id"></param>
+	public static SceneBase GetSceneObject(SceneDefine.SCENE_ID id)
+	{
+		List<SceneBase> sceneList = Instance.sceneList;
+		for (int i = 0; i < sceneList.Count; i++)
+		{
+			if (sceneList[i].SceneID == id)
+			{
+				return sceneList[i];
+			}
+		}
+
+		return null;
+	}
+
+
+	/// <summary>
 	/// 読込終了したか？
 	/// </summary>
 	/// <returns></returns>

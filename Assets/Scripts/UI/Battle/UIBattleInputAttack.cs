@@ -14,12 +14,22 @@ public class UIBattleInputAttack : MonoBehaviour, IPointerDownHandler, IPointerU
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
+		if (!BattleScene.IsPlayableState())
+		{
+			return;
+		}
+
 		pressElapsedTime = 0.0f;
 		isPress = true;
 	}
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
+		if (!BattleScene.IsPlayableState())
+		{
+			return;
+		}
+
 		var player = PlayerManager.GetPlayer();
 		if (player.IsCharge())
 		{
@@ -37,6 +47,11 @@ public class UIBattleInputAttack : MonoBehaviour, IPointerDownHandler, IPointerU
 	void Update()
 	{
 		if (!isPress)
+		{
+			return;
+		}
+
+		if (!BattleScene.IsPlayableState())
 		{
 			return;
 		}

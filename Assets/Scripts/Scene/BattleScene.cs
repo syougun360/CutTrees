@@ -9,6 +9,7 @@ public class BattleScene : SceneBase
 		INIT,
 		LOAD_WAIT,
 		UPDATE,
+		TREE_DOWN,
 		END,
 	}
 
@@ -35,9 +36,30 @@ public class BattleScene : SceneBase
 				}
 				break;
 			case STATE.UPDATE:
+				if (TreeObject.IsAnimationPlaying())
+				{
+					state = STATE.TREE_DOWN;
+				}
+				break;
+			case STATE.TREE_DOWN:
+				if (!TreeObject.IsAnimationPlaying())
+				{
+					state = STATE.UPDATE;
+				}
 				break;
 			case STATE.END:
 				break;
 		}
+	}
+
+	public static bool IsPlayableState()
+	{
+		var battleScene = SceneManager.GetSceneObject(SceneDefine.SCENE_ID.BATTLE) as BattleScene;
+		if (battleScene != null)
+		{
+			return battleScene.state == STATE.UPDATE;
+		}
+
+		return false;
 	}
 }
