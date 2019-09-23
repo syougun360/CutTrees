@@ -15,6 +15,7 @@ public enum MANAGER_TYPE
 	INPUT,
 	CAMERA,
 	EFFECT,
+	WEAPON,
 
 	MAX,
 }
@@ -25,5 +26,10 @@ public enum MANAGER_TYPE
 /// </summary>
 public class SystemManager : MonoBehaviour
 {
+
+	public static void StartBattle()
+	{
+
+	}
 
 }

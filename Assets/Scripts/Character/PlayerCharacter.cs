@@ -10,22 +10,15 @@ public class PlayerCharacter : MonoBehaviour
 	float chargeTime = 1.0f;
 
 	[SerializeField]
-	int attackPower = 1;
-
-	[SerializeField]
-	int chargeAttackPower = 10;
-
-	[SerializeField]
 	CharaMotionController motionController = null;
 
 	[SerializeField]
-	GameObject weaponObject = null;
-
-	[SerializeField]
-	TrailRenderer weaponTrailRenderer = null;
+	Transform weaponNode = null;
 
 	GameObject cacheGameObject = null;
 	Transform cacheTransform = null;
+
+	Weapon equipWeapon = null;
 
 	int chargeEffectHandle = -1;
 	int chargeStartEffectHandle = -1;
@@ -37,13 +30,19 @@ public class PlayerCharacter : MonoBehaviour
 		cacheGameObject = gameObject;
 		cacheTransform = transform;
 
-		weaponTrailRenderer = weaponObject.GetComponentInChildren<TrailRenderer>();
-		weaponTrailRenderer.enabled = false;
+		EventManager.AddEventListener(EVENT_ID.START_BATTLE, StartBattle);
 	}
 
 	private void Start()
 	{
 		motionController.Setup(this);
+	}
+
+	void StartBattle(EventUserDara userData)
+	{
+		var weaponObject = WeaponManager.CreateWeapon(WeaponManager.WEAPON_ID.SWORD_01, weaponNode);
+		weaponObject.OnCreate();
+		equipWeapon = weaponObject;
 	}
 
 	private void Update()
@@ -139,18 +138,20 @@ public class PlayerCharacter : MonoBehaviour
 		{
 			EffectManager.PlayEffect(EffectManager.EFFECT_ID.HIT_CHARGE, ref effectPos);
 			isChargeAttackSuccess = false;
-			damage = chargeAttackPower;
+			damage = equipWeapon.GetChargeAttackPower();
 		}
 		else
 		{
 			EffectManager.PlayEffect(EffectManager.EFFECT_ID.HIT_ATTACK, ref effectPos);
-			damage = attackPower;
+			damage = equipWeapon.GetAttackPower();
 		}
 
 		TreeObject.OnDamage(damage);
 
 		effectPos.y += 1.0f;
 		UIBattleController.GetDamageUI().DrawDamageNumber(damage, ref effectPos);
+
+		equipWeapon.OnHit();
 	}
 
 	/// <summary>
@@ -159,7 +160,7 @@ public class PlayerCharacter : MonoBehaviour
 	/// <param name="value"></param>
 	void onDrawWeaponTrail(int value)
 	{
-		weaponTrailRenderer.enabled = value == 1;
+		equipWeapon.SetDrawTrailRendererEnable(value == 1);
 	}
 
 	public void PlayWinMotion()

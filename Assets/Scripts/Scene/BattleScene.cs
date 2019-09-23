@@ -18,7 +18,9 @@ public class BattleScene : SceneBase
 	protected override void Loaded()
 	{
 		state = STATE.LOAD_WAIT;
+
 		EffectManager.StartLoad();
+		WeaponManager.StartLoad();
 	}
 
 	public override void StartUnload()
@@ -30,9 +32,11 @@ public class BattleScene : SceneBase
 		switch (state)
 		{
 			case STATE.LOAD_WAIT:
-				if (EffectManager.IsLoaded())
+				if (EffectManager.IsLoaded() &&
+					WeaponManager.IsLoaded())
 				{
 					state = STATE.UPDATE;
+					EventManager.Dispatcher(EVENT_ID.START_BATTLE);
 				}
 				break;
 			case STATE.UPDATE:

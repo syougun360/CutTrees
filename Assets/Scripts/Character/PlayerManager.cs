@@ -12,7 +12,6 @@ public class PlayerManager : ManagerBehaviour<PlayerManager>
 		return MANAGER_TYPE.CHARA;
 	}
 
-
 	public static PlayerCharacter GetPlayer()
 	{
 		if (!IsInstance)

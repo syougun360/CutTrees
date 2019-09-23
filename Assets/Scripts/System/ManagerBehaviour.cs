@@ -25,4 +25,5 @@ public abstract class ManagerBehaviour<T> : MonoBehaviour where T : class
 
 	public abstract MANAGER_TYPE GetManagerType();
 
+	public virtual void StartBattle() { }
 }
