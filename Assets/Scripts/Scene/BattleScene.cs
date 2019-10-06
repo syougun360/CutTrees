@@ -17,10 +17,7 @@ public class BattleScene : SceneBase
 
 	protected override void Loaded()
 	{
-		state = STATE.LOAD_WAIT;
-
-		EffectManager.StartLoad();
-		WeaponManager.StartLoad();
+		state = STATE.INIT;
 	}
 
 	public override void StartUnload()
@@ -31,6 +28,15 @@ public class BattleScene : SceneBase
 	{
 		switch (state)
 		{
+			case STATE.INIT:
+				if (MasterDataManager.IsLoaded())
+				{
+					state = STATE.LOAD_WAIT;
+
+					EffectManager.StartLoad();
+					WeaponManager.StartLoad();
+				}
+				break;
 			case STATE.LOAD_WAIT:
 				if (EffectManager.IsLoaded() &&
 					WeaponManager.IsLoaded())

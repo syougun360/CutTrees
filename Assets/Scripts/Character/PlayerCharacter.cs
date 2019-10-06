@@ -18,7 +18,7 @@ public class PlayerCharacter : MonoBehaviour
 	GameObject cacheGameObject = null;
 	Transform cacheTransform = null;
 
-	Weapon equipWeapon = null;
+	WeaponObject equipWeapon = null;
 
 	int chargeEffectHandle = -1;
 	int chargeStartEffectHandle = -1;
@@ -40,7 +40,7 @@ public class PlayerCharacter : MonoBehaviour
 
 	void StartBattle(EventUserDara userData)
 	{
-		var weaponObject = WeaponManager.CreateWeapon(WeaponManager.WEAPON_ID.SWORD_01, weaponNode);
+		var weaponObject = WeaponManager.CreateWeapon(Weapon.WEAPON_ID.SWORD_01, weaponNode);
 		weaponObject.OnCreate();
 		equipWeapon = weaponObject;
 	}

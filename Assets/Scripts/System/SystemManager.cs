@@ -16,6 +16,7 @@ public enum MANAGER_TYPE
 	CAMERA,
 	EFFECT,
 	WEAPON,
+	MASTER_DATA,
 
 	MAX,
 }
