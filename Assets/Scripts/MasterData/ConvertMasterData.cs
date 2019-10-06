@@ -9,10 +9,29 @@ using System;
 
 public class ConvertMasterData : EditorWindow
 {
-	string fileName = "";
-	string masterClassName = "";
+    public enum MASTER_ID
+    {
+        WEAPON,
+    }
 
-	[MenuItem("Window/ConvertMasterData")]
+    class ConvertData
+    {
+        public ConvertData(string file, string className)
+        {
+            fileName = file;
+            masterClassName = className;
+        }
+
+        public string fileName = "";
+        public string masterClassName = "";
+    }
+
+    MASTER_ID id;
+    readonly ConvertData[] CONVERT_DATA = new ConvertData[] {
+        new ConvertData("weapon","Weapon.WeaponInfoMasterData")
+    };
+
+    [MenuItem("Window/ConvertMasterData")]
 	static void Open()
 	{
 		var window = GetWindow<ConvertMasterData>();
@@ -24,20 +43,24 @@ public class ConvertMasterData : EditorWindow
 
 	private void OnGUI()
 	{
-		fileName = EditorGUILayout.TextField("ファイル名：", fileName);
-		masterClassName = EditorGUILayout.TextField("クラス名：", masterClassName);
+        id = (MASTER_ID)EditorGUILayout.EnumPopup("マスタID", id);
 
 		GUILayout.Space(10.0f);
 
 		if (GUILayout.Button("コンバート"))
 		{
-			var text = File.ReadAllText(Application.dataPath + "/../MasterDataJson/" + fileName + ".json");
+            var fileName = CONVERT_DATA[(int)id].fileName;
+            var masterClassName = CONVERT_DATA[(int)id].masterClassName;
+
+            var text = File.ReadAllText(Application.dataPath + "/../MasterDataJson/" + fileName + ".json");
 			Type type = Type.GetType(masterClassName);
 			var jsonData = JsonUtility.FromJson(text, type);
 			var msgPack = MasterDataUtility.Seialize(jsonData);
 			File.WriteAllBytes(Application.dataPath + "/Resources/master_data/" + fileName + ".bytes", msgPack);
 
 			AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+
+            Debug.Log("コンバート成功");
 		}
 	}
 }

@@ -1,6 +1,6 @@
 // -------------------------------------------------
 // 武器のデータベース
-// 作成時間：Wed Sep 25 2019 00:35:32 GMT+0900 (JST)
+// 作成時間：Sun Oct 06 2019 20:37:03 GMT+0900 (JST)
 // -------------------------------------------------
 namespace Weapon
 {
@@ -33,6 +33,9 @@ namespace Weapon
 		public long labelHash;
 		public string name;
 		public string res_name;
+		public string icon_parh;
+		public int level;
+		public int equip_level;
 		public int attack_power;
 		public int charge_attack_power;
 		public int hp;

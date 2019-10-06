@@ -41,7 +41,6 @@ public class PlayerCharacter : MonoBehaviour
 	void StartBattle(EventUserDara userData)
 	{
 		var weaponObject = WeaponManager.CreateWeapon(Weapon.WEAPON_ID.SWORD_01, weaponNode);
-		weaponObject.OnCreate();
 		equipWeapon = weaponObject;
 	}
 
@@ -168,4 +167,9 @@ public class PlayerCharacter : MonoBehaviour
 		Idle();
 		motionController.SetTriggerParam("Win");
 	}
+
+    public WeaponObject GetEquipWeaponObject()
+    {
+        return equipWeapon;
+    }
 }

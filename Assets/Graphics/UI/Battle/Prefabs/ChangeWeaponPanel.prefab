@@ -1829,6 +1829,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a4ee91605bce548b191febd7ff761f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipIconObject: {fileID: 62294206105420198}
+  levelValue: {fileID: 62294206902121438}
+  nameValue: {fileID: 62294206084765208}
+  attackPowerValue: {fileID: 62294205717310524}
+  chargeAttackPowerValue: {fileID: 62294206055379679}
+  usedLvValue: {fileID: 62294207091686662}
+  hpValue: {fileID: 62294207666494031}
 --- !u!114 &62294207575382081
 MonoBehaviour:
   m_ObjectHideFlags: 0

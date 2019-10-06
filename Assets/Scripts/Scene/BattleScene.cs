@@ -33,7 +33,9 @@ public class BattleScene : SceneBase
 				{
 					state = STATE.LOAD_WAIT;
 
-					EffectManager.StartLoad();
+                    GameParam.Setup();
+
+                    EffectManager.StartLoad();
 					WeaponManager.StartLoad();
 				}
 				break;

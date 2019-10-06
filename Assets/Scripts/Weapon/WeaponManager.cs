@@ -17,6 +17,7 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 		public GameObject loadObject = null;
 		public AssetLoadHandle assetLoadHandle = null;
 		public bool isLoaded = false;
+        public Weapon.WeaponInfo info = null;
 	}
 
 	WeaponLoadData[] weaponDatas = new WeaponLoadData[(int)Weapon.WEAPON_ID.MAX];
@@ -50,6 +51,8 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 				var data = new WeaponLoadData();
 				var path = "weapon/" + masterDataRow.res_name;
 				data.id = (Weapon.WEAPON_ID)i;
+                data.info = masterDataRow;
+
 				if (string.IsNullOrEmpty(path))
 				{
 					data.isLoaded = true;
@@ -113,18 +116,22 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 	/// <returns></returns>
 	public static WeaponObject CreateWeapon(Weapon.WEAPON_ID id, Transform weaponNode)
 	{
-		for (int i = 0; i < Instance.weaponDatas.Length; i++)
+        var data = Instance.weaponDatas;
+
+        for (int i = 0; i < data.Length; i++)
 		{
-			if (!Instance.weaponDatas[i].isLoaded)
+			if (!data[i].isLoaded)
 			{
 				continue;
 			}
 
-			if (Instance.weaponDatas[i].id == id)
+			if (data[i].id == id)
 			{
-				var obj = GameObject.Instantiate(Instance.weaponDatas[i].loadObject, weaponNode);
-				return obj.GetComponent<WeaponObject>();
-			}
+				var obj = GameObject.Instantiate(data[i].loadObject, weaponNode);
+				var weapon = obj.GetComponent<WeaponObject>();
+                weapon.OnCreate(data[i].info);
+                return weapon;
+            }
 		}
 
 		return null;

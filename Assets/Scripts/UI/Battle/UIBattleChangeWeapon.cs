@@ -27,10 +27,10 @@ public class UIBattleChangeWeapon : UIBase
 	{
 		base.Open();
 
-		var masterData = MasterDataManager.GetMasterData<Weapon.WeaponInfoMasterData>(MasterDataManager.MASTER_DATE_ID.WEAPON);
-		if (masterData != null)
+        var paramList = GameParam.GetWeaponParamList();
+		if (paramList != null)
 		{
-			scrollRectUI.SetItemData(masterData.datas);
+			scrollRectUI.SetItemData(paramList);
 			ResetButton();
 		}
 	}
