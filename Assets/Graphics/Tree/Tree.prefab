@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 914719340}
   - component: {fileID: 914719342}
   - component: {fileID: 914719341}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 339054335798771663}
   - component: {fileID: 8341739531274409487}
   - component: {fileID: 7090216360659886258}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DownImpactPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6648519070836168304}
   - component: {fileID: 8407084408930315642}
   - component: {fileID: 5870603725407888565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 1432373050134111171}
   - component: {fileID: 7642893321055470154}
   - component: {fileID: 4917722541980744167}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 5452549649175673779}
   - component: {fileID: 8516725512163732135}
   - component: {fileID: 1698448887062338794}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 5452593509975237591}
   - component: {fileID: 5463764148421922273}
   - component: {fileID: 5472145696171215373}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

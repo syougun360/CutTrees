@@ -128,6 +128,7 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 			if (data[i].id == id)
 			{
 				var obj = GameObject.Instantiate(data[i].loadObject, weaponNode);
+                obj.layer = LayerDefine.Player;
 				var weapon = obj.GetComponent<WeaponObject>();
                 weapon.OnCreate(data[i].info);
                 return weapon;

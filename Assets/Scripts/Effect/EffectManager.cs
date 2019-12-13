@@ -142,7 +142,8 @@ public class EffectManager : ManagerBehaviour<EffectManager>
 					GameObject instance = GameObject.Instantiate(data.gameObject, rootTrans);
 					instance.name = data.gameObject.name;
 					instance.SetActive(false);
-					particles[k] = instance.GetComponent<ParticleSystem>();
+                    instance.layer = LayerDefine.Effect;
+                    particles[k] = instance.GetComponent<ParticleSystem>();
 				}
 
 				effectTable.Add(id, particles);
