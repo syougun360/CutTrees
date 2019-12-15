@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6eda38eda514bb6aabb0ecf9f004ac, type: 3}
+  m_Name: icon
+  m_EditorClassIdentifier: 
+  SheetName: CutTree_IconDB
+  WorksheetName: Icon
+  dataArray:
+  - id: 0
+    iconid: 0
+    folder: icon/weapon/
+    filename: sword_01
+  - id: 1
+    iconid: 1
+    folder: icon/weapon/
+    filename: sword_02
+  - id: 2
+    iconid: 2
+    folder: icon/weapon/
+    filename: sword_03
+  - id: 3
+    iconid: 3
+    folder: icon/weapon/
+    filename: hummer_01
+  - id: 4
+    iconid: 4
+    folder: icon/weapon/
+    filename: staff_01
+  - id: 5
+    iconid: 5
+    folder: icon/weapon/
+    filename: axe_01
+  - id: 6
+    iconid: 6
+    folder: icon/weapon/
+    filename: axe_02
+  - id: 7
+    iconid: 7
+    folder: icon/weapon/
+    filename: club_01

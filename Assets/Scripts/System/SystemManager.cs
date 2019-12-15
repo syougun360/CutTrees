@@ -17,8 +17,9 @@ public enum MANAGER_TYPE
 	EFFECT,
 	WEAPON,
 	MASTER_DATA,
+    ICON,
 
-	MAX,
+    MAX,
 }
 
 /// <summary>

@@ -9,6 +9,7 @@ public class MasterDataManager : ManagerBehaviour<MasterDataManager>
         NONE,
 
         WEAPON,
+        ICON,
 
         MAX,
     }
@@ -25,6 +26,7 @@ public class MasterDataManager : ManagerBehaviour<MasterDataManager>
     readonly string[] MASTER_DATA_FILE_TABLE = {
         "",
         "weapon",
+        "icon",
     };
 
     bool isLoaded = false;
