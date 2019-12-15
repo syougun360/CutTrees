@@ -13,18 +13,18 @@ public class WeaponObject : MonoBehaviour
 	[SerializeField]
 	int maxHp = 100;
 
-    Weapon.WEAPON_ID id;
+    MasterData.WEAPONID id;
 	int hp = 100;
 
 	GameObject weaponObject = null;
 	TrailRenderer trailRenderer = null;
 
-	public void OnCreate(Weapon.WeaponInfo info)
+	public void OnCreate(MasterData.WeaponData info)
 	{
-        id = (Weapon.WEAPON_ID)info.id;
-        attackPower = info.attack_power;
-        chargeAttackPower = info.charge_attack_power;
-        maxHp = info.hp;
+        id = info.Weaponid;
+        attackPower = info.Attackpower;
+        chargeAttackPower = info.Chargeattackpower;
+        maxHp = info.HP;
         hp = maxHp;
 
         weaponObject = gameObject;
@@ -73,7 +73,7 @@ public class WeaponObject : MonoBehaviour
 		return maxHp;
 	}
 
-    public Weapon.WEAPON_ID GetId()
+    public MasterData.WEAPONID GetId()
     {
         return id;
     }

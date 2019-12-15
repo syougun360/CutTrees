@@ -1,0 +1,11 @@
+using UnityEngine;
+using System.Collections;
+
+namespace MasterData
+{
+    [System.Serializable]
+    public class $ClassName
+    {
+$MemberFields
+    }
+}

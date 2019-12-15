@@ -11,18 +11,18 @@ public static class GameParam
 
     public static void Setup()
     {
-        var weaponMasterData = MasterDataManager.GetMasterData<Weapon.WeaponInfoMasterData>(MasterDataManager.MASTER_DATE_ID.WEAPON);
-        for (int i = 1; i < weaponMasterData.datas.Length; i++)
+        var weaponMasterData = MasterDataManager.GetMasterData<MasterData.Weapon>(MasterDataManager.MASTER_DATE_ID.WEAPON);
+        for (int i = 1; i < weaponMasterData.dataArray.Length; i++)
         {
-            var data = weaponMasterData.datas[i];
+            var data = weaponMasterData.dataArray[i];
             var param = new WeaponParam();
-            param.id = data.id;
-            param.hp = data.hp;
-            weaponParamDic.Add(data.id, param);
+            param.id = data.ID;
+            param.hp = data.HP;
+            weaponParamDic.Add(data.ID, param);
         }
     }
 
-    public static void SetEquipWeaponID(Weapon.WEAPON_ID id)
+    public static void SetEquipWeaponID(MasterData.WEAPONID id)
     {
         playerParam.equipWeaponId = (int)id;
     }
@@ -47,7 +47,7 @@ public static class GameParam
         return treeParam;
     }
 
-    public static WeaponParam GetWeaponParam(Weapon.WEAPON_ID id)
+    public static WeaponParam GetWeaponParam(MasterData.WEAPONID id)
     {
         int intId = (int)id;
         if (weaponParamDic.ContainsKey(intId))

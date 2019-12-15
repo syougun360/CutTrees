@@ -40,7 +40,7 @@ public class PlayerCharacter : MonoBehaviour
 
 	void StartBattle(EventUserDara userData)
 	{
-		var weaponObject = WeaponManager.CreateWeapon(Weapon.WEAPON_ID.SWORD_01, weaponNode);
+		var weaponObject = WeaponManager.CreateWeapon(MasterData.WEAPONID.SWORD_01, weaponNode);
 		equipWeapon = weaponObject;
 	}
 

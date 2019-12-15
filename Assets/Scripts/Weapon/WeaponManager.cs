@@ -13,14 +13,14 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 
 	class WeaponLoadData
 	{
-		public Weapon.WEAPON_ID id;
+		public MasterData.WEAPONID id;
 		public GameObject loadObject = null;
 		public AssetLoadHandle assetLoadHandle = null;
 		public bool isLoaded = false;
-        public Weapon.WeaponInfo info = null;
+        public MasterData.WeaponData info = null;
 	}
 
-	WeaponLoadData[] weaponDatas = new WeaponLoadData[(int)Weapon.WEAPON_ID.MAX];
+	WeaponLoadData[] weaponDatas = new WeaponLoadData[(int)MasterData.WEAPONID.Max];
 	SeqStateUtility<SEQ_STATE> seqState = new SeqStateUtility<SEQ_STATE>(SEQ_STATE.NONE);
 
 	public override MANAGER_TYPE GetManagerType()
@@ -44,28 +44,28 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 	{
 		if (!seqState.IsInit())
 		{
-			var masterData = MasterDataManager.GetMasterData<Weapon.WeaponInfoMasterData>(MasterDataManager.MASTER_DATE_ID.WEAPON);
-			for (int i = 0; i < (int)Weapon.WEAPON_ID.MAX; i++)
-			{
-				var masterDataRow = masterData.datas[i];
-				var data = new WeaponLoadData();
-				var path = "weapon/" + masterDataRow.res_name;
-				data.id = (Weapon.WEAPON_ID)i;
+            var masterData = MasterDataManager.GetMasterData<MasterData.Weapon>(MasterDataManager.MASTER_DATE_ID.WEAPON);
+            for (int i = 0; i < masterData.dataArray.Length; i++)
+            {
+                var masterDataRow = masterData.dataArray[i];
+                var data = new WeaponLoadData();
+                var path = "weapon/" + masterDataRow.Modelresname;
+                data.id = masterDataRow.Weaponid;
                 data.info = masterDataRow;
 
-				if (string.IsNullOrEmpty(path))
-				{
-					data.isLoaded = true;
-				}
-				else
-				{
-					data.assetLoadHandle = AssetLoadManager.Load<GameObject>(ref path);
-				}
+                if (string.IsNullOrEmpty(path))
+                {
+                    data.isLoaded = true;
+                }
+                else
+                {
+                    data.assetLoadHandle = AssetLoadManager.Load<GameObject>(ref path);
+                }
 
-				weaponDatas[i] = data;
-			}
+                weaponDatas[i] = data;
+            }
 
-			seqState.SetInit(true);
+            seqState.SetInit(true);
 		}
 
 		bool end = true;
@@ -114,7 +114,7 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 	/// <param name="id"></param>
 	/// <param name="weaponNode"></param>
 	/// <returns></returns>
-	public static WeaponObject CreateWeapon(Weapon.WEAPON_ID id, Transform weaponNode)
+	public static WeaponObject CreateWeapon(MasterData.WEAPONID id, Transform weaponNode)
 	{
         var data = Instance.weaponDatas;
 
@@ -138,17 +138,17 @@ public class WeaponManager : ManagerBehaviour<WeaponManager>
 		return null;
 	}
 
-	public static Weapon.WeaponInfo GetWeaponData(Weapon.WEAPON_ID id)
+	public static MasterData.WeaponData GetWeaponData(MasterData.WEAPONID id)
 	{
-		var masterData = MasterDataManager.GetMasterData<Weapon.WeaponInfoMasterData>(MasterDataManager.MASTER_DATE_ID.WEAPON);
-		for (int i = 0; i < masterData.datas.Length; i++)
-		{
-			if (masterData.datas[i].id == (int)id)
-			{
-				return masterData.datas[i];
-			}
-		}
+        var masterData = MasterDataManager.GetMasterData<MasterData.Weapon>(MasterDataManager.MASTER_DATE_ID.WEAPON);
+        for (int i = 0; i < masterData.dataArray.Length; i++)
+        {
+            if (masterData.dataArray[i].ID == (int)id)
+            {
+                return masterData.dataArray[i];
+            }
+        }
 
-		return null;
+        return null;
 	}
 }

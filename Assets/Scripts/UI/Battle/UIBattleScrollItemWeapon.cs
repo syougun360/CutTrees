@@ -37,7 +37,7 @@ public class UIBattleScrollItemWeapon : MonoBehaviour, IInfiniteScrollItem
 		gameObject.SetActive(true);
 
         var param = (WeaponParam)data;
-        var weaponData = WeaponManager.GetWeaponData((Weapon.WEAPON_ID)param.id);
+        var weaponData = WeaponManager.GetWeaponData((MasterData.WEAPONID)param.id);
         var player = PlayerManager.GetPlayer();
         var weapon = player.GetEquipWeaponObject();
         bool isEquip = (int)weapon.GetId() == param.id;
@@ -52,10 +52,10 @@ public class UIBattleScrollItemWeapon : MonoBehaviour, IInfiniteScrollItem
             hpValue.text = param.hp.ToString();
         }
 
-        attackPowerValue.text = weaponData.attack_power.ToString();
-        chargeAttackPowerValue.text = weaponData.charge_attack_power.ToString();
-        nameValue.text = weaponData.name;
-        levelValue.text = weaponData.level.ToString();
-        usedLvValue.text = weaponData.equip_level.ToString();
+        attackPowerValue.text = weaponData.Attackpower.ToString();
+        chargeAttackPowerValue.text = weaponData.Chargeattackpower.ToString();
+        nameValue.text = weaponData.Name;
+        levelValue.text = weaponData.Level.ToString();
+        usedLvValue.text = weaponData.Equiplevel.ToString();
     }
 }

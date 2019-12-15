@@ -4,125 +4,127 @@ using UnityEngine;
 
 public class MasterDataManager : ManagerBehaviour<MasterDataManager>
 {
-	public enum MASTER_DATE_ID
-	{
-		NONE,
-
-		WEAPON,
-
-		MAX,
-	}
-
-	class MasterData
-	{
-		public MASTER_DATE_ID id;
-		public bool isLoaded = false;
-		public string fileName = "";
-		public AssetLoadHandle assetLoadHandle = null;
-		public TextAsset textAsset = null;
-	}
-
-	readonly string[] MASTER_DATA_FILE_TABLE = new string[(int)MASTER_DATE_ID.MAX] {
-		"",
-		"weapon"
-	};
-
-	bool isLoaded = false;
-	MasterData[] masterDatas = new MasterData[(int)MASTER_DATE_ID.MAX];
-
-	public override MANAGER_TYPE GetManagerType()
-	{
-		return MANAGER_TYPE.MASTER_DATA;
-	}
-
-	void Start()
+    public enum MASTER_DATE_ID
     {
-		for (int i = 0; i < MASTER_DATA_FILE_TABLE.Length; i++)
-		{
-			MasterData data = new MasterData();
-			string resPath = "master_data/" + MASTER_DATA_FILE_TABLE[i];
-			data.fileName = MASTER_DATA_FILE_TABLE[i];
-			data.id = (MASTER_DATE_ID)i;
+        NONE,
 
-			if (string.IsNullOrEmpty(data.fileName))
-			{
-				data.isLoaded = true;
-			}
-			else
-			{
-				data.assetLoadHandle = AssetLoadManager.Load<TextAsset>(ref resPath);
-			}
+        WEAPON,
 
-			masterDatas[i] = data;
-		}
-	}
+        MAX,
+    }
 
-	private void Update()
-	{
-		if (isLoaded)
-		{
-			return;
-		}
+    class MasterData
+    {
+        public MASTER_DATE_ID id;
+        public bool isLoaded = false;
+        public string fileName = "";
+        public ScriptableObject dataObject = null;
+		public AssetLoadHandle assetLoadHandle = null;
+    }
 
-		isLoaded = true;
-		for (int i = 0; i < masterDatas.Length; i++)
-		{
-			var data = masterDatas[i];
-			if (data.isLoaded)
-			{
-				continue;
-			}
+    readonly string[] MASTER_DATA_FILE_TABLE = {
+        "",
+        "weapon",
+    };
 
-			if (data.assetLoadHandle.Result == ASSET_LOAD_RESULT_TYPE.SUCCESS)
-			{
-				data.textAsset = data.assetLoadHandle.LoadObject as TextAsset;
-				data.isLoaded = true;
-			}
-			else if (data.assetLoadHandle.Result == ASSET_LOAD_RESULT_TYPE.FAILURE)
-			{
-				data.isLoaded = true;
-			}
-			else
-			{
-				isLoaded = false;
-			}
-		}
-	}
+    bool isLoaded = false;
+    MasterData[] masterDatas = new MasterData[(int)MASTER_DATE_ID.MAX];
 
-	public static bool IsLoaded()
-	{
-		if (IsInstance)
-		{
-			return Instance.isLoaded;
-		}
+    public override MANAGER_TYPE GetManagerType()
+    {
+        return MANAGER_TYPE.MASTER_DATA;
+    }
 
-		return false;
-	}
+    void Start()
+    {
+        for (int i = 0; i < MASTER_DATA_FILE_TABLE.Length; i++)
+        {
+            MasterData data = new MasterData();
+            string resPath = "master_data/" + MASTER_DATA_FILE_TABLE[i];
+            data.fileName = MASTER_DATA_FILE_TABLE[i];
+            data.id = (MASTER_DATE_ID)i;
 
-	/// <summary>
-	/// マスターデータ取得
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <param name="id"></param>
-	/// <returns></returns>
-	public static T GetMasterData<T>(MASTER_DATE_ID id) where T : class
-	{
-		for (int i = 0; i < Instance.masterDatas.Length; i++)
-		{
-			var data = Instance.masterDatas[i];
-			if (!data.isLoaded)
-			{
-				continue;
-			}
+            if (string.IsNullOrEmpty(data.fileName))
+            {
+                data.isLoaded = true;
+            }
+            else
+            {
+				data.assetLoadHandle = AssetLoadManager.Load<ScriptableObject>(ref resPath);
+            }
 
-			if (data.id == id)
-			{
-				byte[] bytes = data.textAsset.bytes;
-				return MasterDataUtility.Deserialize<T>(ref bytes);
-			}
-		}
+            masterDatas[i] = data;
+        }
+    }
 
-		return null;
-	}
+    private void Update()
+    {
+        if (isLoaded)
+        {
+            return;
+        }
+
+        isLoaded = true;
+        for (int i = 0; i < masterDatas.Length; i++)
+        {
+            var data = masterDatas[i];
+            if (data.isLoaded)
+            {
+                continue;
+            }
+
+            if (data.assetLoadHandle.Result == ASSET_LOAD_RESULT_TYPE.SUCCESS)
+            {
+                data.dataObject = data.assetLoadHandle.LoadObject as ScriptableObject;
+                data.isLoaded = true;
+            }
+            else if (data.assetLoadHandle.Result == ASSET_LOAD_RESULT_TYPE.FAILURE)
+            {
+                data.isLoaded = true;
+            }
+            else
+            {
+                isLoaded = false;
+            }
+        }
+    }
+
+    public static bool IsLoaded()
+    {
+        if (IsInstance)
+        {
+            return Instance.isLoaded;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// マスターデータ取得
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public static T GetMasterData<T>(MASTER_DATE_ID id) where T : ScriptableObject
+    {
+        for (int i = 0; i < Instance.masterDatas.Length; i++)
+        {
+            var data = Instance.masterDatas[i];
+            if (!data.isLoaded)
+            {
+                continue;
+            }
+
+            if (data.id == id)
+            {
+                var masterData = data.dataObject as T;
+                return masterData;
+            }
+        }
+
+        return null;
+    }
+
+
 
 }
