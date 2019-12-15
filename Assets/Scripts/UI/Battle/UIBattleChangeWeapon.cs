@@ -45,6 +45,11 @@ public class UIBattleChangeWeapon : UIBase
 
 	protected override void OnButtonSelectCallback(Button button, int buttonNameHash, int number)
 	{
+        var index = scrollRectUI.GetItemIndex(number);
+        var paramList = GameParam.GetWeaponParamList();
+        var id = (MasterData.WEAPONID)paramList[index].id;
+        PlayerManager.GetPlayer().ChangeWeapon(id);
 
-	}
+        scrollRectUI.RefreshItemData();
+    }
 }

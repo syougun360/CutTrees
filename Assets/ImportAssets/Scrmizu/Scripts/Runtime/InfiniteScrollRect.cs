@@ -134,6 +134,11 @@ namespace Scrmizu
             }
         }
 
+        public int GetItemIndex(int index)
+        {
+            return _infiniteScrollBinders[index].ItemIndex;
+        }
+
         /// <summary>
         /// Sets the item data.
         /// </summary>
@@ -143,6 +148,16 @@ namespace Scrmizu
             _itemDataList = data.ToList();
             _itemSizeList = Enumerable.Repeat(defaultItemSize, _itemDataList.Count).ToList();
             MovePositionAt(0);
+            UpdateContents();
+            _isUpdateCanvasRequest = true;
+        }
+
+        /// <summary>
+        /// Sets the item data.
+        /// </summary>
+        /// <param name="data">Data.</param>
+        public void RefreshItemData()
+        {
             UpdateContents();
             _isUpdateCanvasRequest = true;
         }

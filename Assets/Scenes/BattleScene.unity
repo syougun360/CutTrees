@@ -1101,11 +1101,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2099398409518343495, guid: b4384ea52eb4e8946874de4a8cb767e9,
+    - target: {fileID: 3547410512874400405, guid: b4384ea52eb4e8946874de4a8cb767e9,
         type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1592634811}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4384ea52eb4e8946874de4a8cb767e9, type: 3}
 --- !u!224 &443014623951939698 stripped

@@ -21,6 +21,9 @@ public class UIBattleDamage : MonoBehaviour
 	[SerializeField]
 	int createDamageObjectCount = 10;
 
+    [SerializeField]
+    Canvas canvas = null;
+
 	DamageData[] damageDatas = null;
 
 	private void Awake()
@@ -67,8 +70,13 @@ public class UIBattleDamage : MonoBehaviour
 				continue;
 			}
 
-			damageDatas[i].transform.position = Camera.main.WorldToScreenPoint(worldPos, Camera.MonoOrStereoscopicEye.Mono);
-			damageDatas[i].text.text = damage.ToString();
+            Vector2 pos = GlobalDefine.Vec2Zero;
+            var screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform,
+                screenPos, canvas.worldCamera, out pos);
+
+            damageDatas[i].transform.localPosition = pos;
+            damageDatas[i].text.text = damage.ToString();
 			var state = damageDatas[i].animation.PlayQueued("uianim_battle_damage", QueueMode.PlayNow);
 			damageDatas[i].animationState = state;
 			damageDatas[i].active = true;

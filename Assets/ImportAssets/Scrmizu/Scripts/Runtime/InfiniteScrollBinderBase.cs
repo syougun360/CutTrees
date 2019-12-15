@@ -15,12 +15,12 @@ namespace Scrmizu
         /// <summary>
         /// Get item index.
         /// </summary>
-        internal int ItemIndex { get; private set; }
+        public int ItemIndex { get; private set; }
 
         /// <summary>
         /// Get InfiniteScrollItem.
         /// </summary>
-        protected IInfiniteScrollItem InfiniteScrollItem { get; set; }
+        public IInfiniteScrollItem InfiniteScrollItem { get; protected set; }
 
         /// <summary>
         /// Get parent InfiniteScrollRect.

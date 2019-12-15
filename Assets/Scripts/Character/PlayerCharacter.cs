@@ -172,4 +172,14 @@ public class PlayerCharacter : MonoBehaviour
     {
         return equipWeapon;
     }
+
+    public void ChangeWeapon(MasterData.WEAPONID id)
+    {
+        Destroy(equipWeapon.gameObject);
+
+        var weaponObject = WeaponManager.CreateWeapon(id, weaponNode);
+        equipWeapon = weaponObject;
+
+        GameParam.SetEquipWeaponID(id);
+    }
 }
