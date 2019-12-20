@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcda13c00cae4f4087d84a149a1c70b, type: 3}
   m_Name: Google Data Settings
   m_EditorClassIdentifier: 
-  TemplatePath: QuickSheet/GDataPlugin/Templates
-  RuntimePath: 
-  EditorPath: 
+  TemplatePath: ImportAssets/QuickSheet/GDataPlugin/Templates
+  RuntimePath: Scripts/MasterData/Data
+  EditorPath: Scripts/MasterData/Editor
   OAuth2Data:
     client_id: 237791244361-do8u0fshj9ojsqvqlda6bel68dopdibm.apps.googleusercontent.com
     auth_uri: 
