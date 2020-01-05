@@ -37,7 +37,12 @@ public class TreeObject : MonoBehaviour
 	[SerializeField]
 	Transform treeDownImpactEffectPoint = null;
 
-	Animation treeAnimation = null;
+    [SerializeField]
+    Transform scaleTrans = null;
+    [SerializeField]
+    Transform bottomTrans = null;
+
+    Animation treeAnimation = null;
 	AnimationState treeAnimationState = null;
 
 	static TreeObject instance = null;
@@ -68,7 +73,10 @@ public class TreeObject : MonoBehaviour
 		treeWave = 0;
 		scale = data.Scale;
 
-		var playerTrans = PlayerManager.GetPlayer().transform;
+        scaleTrans.localScale = GlobalDefine.Vec3One * scale;
+        bottomTrans.localScale = new Vector3(scale, 1.0f, scale);
+
+        var playerTrans = PlayerManager.GetPlayer().transform;
 		playerDistance = (playerTrans.localPosition - attackPoint.position).magnitude;
 
 		var cameraTrans = Camera.main.transform;
@@ -124,7 +132,8 @@ public class TreeObject : MonoBehaviour
         var data = masterData.dataArray[treeWave + 1];
 
         scale = data.Scale;
-		transform.localScale = GlobalDefine.Vec3One * scale;
+        scaleTrans.localScale = GlobalDefine.Vec3One * scale;
+        bottomTrans.localScale = new Vector3(scale, 1.0f, scale);
 
         maxHp = data.Hp;
         hp = maxHp;
