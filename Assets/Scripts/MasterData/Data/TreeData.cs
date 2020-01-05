@@ -14,5 +14,9 @@ namespace MasterData
         int hp;
         public int Hp { get {return hp; } set { hp = value;} }
         
+        [SerializeField]
+        float scale;
+        public float Scale { get {return scale; } set { scale = value;} }
+        
     }
 }

@@ -10,6 +10,7 @@ public class MasterDataManager : ManagerBehaviour<MasterDataManager>
 
         WEAPON,
         ICON,
+        TREE,
 
         MAX,
     }
@@ -27,6 +28,7 @@ public class MasterDataManager : ManagerBehaviour<MasterDataManager>
         "",
         "weapon",
         "icon",
+        "tree",
     };
 
     bool isLoaded = false;

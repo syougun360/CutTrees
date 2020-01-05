@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EventManager;
 
 public class TreeObject : MonoBehaviour
 {
@@ -20,12 +21,6 @@ public class TreeObject : MonoBehaviour
 
 	[SerializeField]
 	int treeWave = 0;
-
-	[SerializeField]
-	float nextHpCoefficient = 1.5f;
-
-	[SerializeField]
-	float nextScaleCoefficient = 1.1f;
 
 	[SerializeField]
 	float scale = 1.0f;
@@ -58,11 +53,20 @@ public class TreeObject : MonoBehaviour
 		treeAnimation = GetComponent<Animation>();
 	}
 
-	private void Start()
+    private void Start()
+    {
+        EventManager.AddEventListener(EVENT_ID.START_BATTLE, OnStartBattle);
+    }
+
+    void OnStartBattle(EventUserDara userData)
 	{
-		hp = maxHp;
+        var masterData = MasterDataManager.GetMasterData<MasterData.Tree>(MasterDataManager.MASTER_DATE_ID.TREE);
+        var data = masterData.dataArray[1];
+
+        maxHp = data.Hp;
+        hp = maxHp;
 		treeWave = 0;
-		scale = 1.0f;
+		scale = data.Scale;
 
 		var playerTrans = PlayerManager.GetPlayer().transform;
 		playerDistance = (playerTrans.localPosition - attackPoint.position).magnitude;
@@ -116,11 +120,14 @@ public class TreeObject : MonoBehaviour
 		treeWave++;
 		statusUI.SetTreeWave(treeWave);
 
-		scale = scale * nextScaleCoefficient;
+        var masterData = MasterDataManager.GetMasterData<MasterData.Tree>(MasterDataManager.MASTER_DATE_ID.TREE);
+        var data = masterData.dataArray[treeWave + 1];
+
+        scale = data.Scale;
 		transform.localScale = GlobalDefine.Vec3One * scale;
 
-		maxHp = (int)(maxHp * nextHpCoefficient);
-		hp = maxHp;
+        maxHp = data.Hp;
+        hp = maxHp;
 		statusUI.SetTreeHpValue(hp, GetHpRatio(), true);
 
 		var playerTrans = PlayerManager.GetPlayer().transform;

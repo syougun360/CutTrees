@@ -26,5 +26,9 @@ MonoBehaviour:
     name: Hp
     isEnable: 0
     isArray: 0
+  - type: 5
+    name: Scale
+    isEnable: 0
+    isArray: 0
   enumFiledList: []
   AccessCode: 
