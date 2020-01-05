@@ -1483,6 +1483,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 3287218845824828382, guid: eca3be72e84c6694881f2e41827a28f9,
+        type: 3}
+      propertyPath: autoAttackTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3283390142670873044, guid: eca3be72e84c6694881f2e41827a28f9,
         type: 3}
       propertyPath: m_LocalPosition.x

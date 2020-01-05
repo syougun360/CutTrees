@@ -1103,6 +1103,7 @@ MonoBehaviour:
   chargeTime: 1
   motionController: {fileID: 3287218845824828381}
   weaponNode: {fileID: 3283372944833645482}
+  autoAttackTime: 2
 --- !u!1 &3286872371342481484
 GameObject:
   m_ObjectHideFlags: 0

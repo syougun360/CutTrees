@@ -15,7 +15,10 @@ public class PlayerCharacter : MonoBehaviour
 	[SerializeField]
 	Transform weaponNode = null;
 
-	GameObject cacheGameObject = null;
+    [SerializeField]
+    float autoAttackTime = 2.0f;
+
+    GameObject cacheGameObject = null;
 	Transform cacheTransform = null;
 
 	WeaponObject equipWeapon = null;
@@ -24,8 +27,9 @@ public class PlayerCharacter : MonoBehaviour
 	int chargeStartEffectHandle = -1;
 	float chargeElapsedTime = 0.0f;
 	bool isChargeAttackSuccess = false;
+    float elapsedAutoAttackTime = 0.0f;
 
-	private void Awake()
+    private void Awake()
 	{
 		cacheGameObject = gameObject;
 		cacheTransform = transform;
@@ -45,19 +49,32 @@ public class PlayerCharacter : MonoBehaviour
 	}
 
 	private void Update()
-	{
-		if (IsCharge())
-		{
-			if (!isChargeAttackSuccess)
-			{
-				chargeElapsedTime += GlobalDefine.DeltaTime;
-				if (chargeElapsedTime >= chargeTime)
-				{
-					SuccessCharge();
-					isChargeAttackSuccess = true;
-				}
-			}
-		}
+    {
+        if (!BattleScene.IsPlayableState())
+        {
+            return;
+        }
+
+        if (IsCharge())
+        {
+            if (!isChargeAttackSuccess)
+            {
+                chargeElapsedTime += GlobalDefine.DeltaTime;
+                if (chargeElapsedTime >= chargeTime)
+                {
+                    SuccessCharge();
+                    isChargeAttackSuccess = true;
+                }
+            }
+        }
+        else
+        {
+            elapsedAutoAttackTime += GlobalDefine.DeltaTime;
+            if (elapsedAutoAttackTime >= autoAttackTime)
+            {
+                Attack();
+            }
+        }
 	}
 
 	public void Attack()
@@ -72,9 +89,11 @@ public class PlayerCharacter : MonoBehaviour
 			EffectManager.StopEffect(EffectManager.EFFECT_ID.CHARGE, ref chargeEffectHandle);
 			EffectManager.StopEffect(EffectManager.EFFECT_ID.CHARGE_START, ref chargeStartEffectHandle);
 		}
-	}
 
-	public void StartCharge()
+        elapsedAutoAttackTime = 0.0f;
+    }
+
+    public void StartCharge()
 	{
 		if (IsCharge())
 		{
@@ -89,9 +108,11 @@ public class PlayerCharacter : MonoBehaviour
 
 		var effectPos = cacheTransform.localPosition + GlobalDefine.Vec3Down;
 		chargeStartEffectHandle = EffectManager.PlayEffect(EffectManager.EFFECT_ID.CHARGE_START, ref effectPos);
-	}
 
-	public void SuccessCharge()
+        elapsedAutoAttackTime = 0.0f;
+    }
+
+    public void SuccessCharge()
 	{
 		EffectManager.StopEffect(EffectManager.EFFECT_ID.CHARGE, ref chargeEffectHandle);
 		EffectManager.StopEffect(EffectManager.EFFECT_ID.CHARGE_START, ref chargeStartEffectHandle);
